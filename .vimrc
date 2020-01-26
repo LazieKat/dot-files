@@ -1,24 +1,39 @@
-set t_Co=256
+set t_Co=256                      " enable 256 color
+colo darkblue                     " set darkblue there
+syntax enable                     " enable syntax highlighting
+set noswapfile                    " no .swp files cuz they're annoying
+set ai                            " enable auto indenting
+set tabstop=4                     " set tab width
+set backspace=indent,eol,start    " let backspace delete anything
+set showmatch                     " show matching brackets
+set incsearch                     " show search results while typing
+set hlsearch                      " highlight search results
+set encoding=utf-8 
+set ruler                         " show curent position
+set number relativenumber         " set line numbers to relative
+set wrap                          " wrap long lines
+set belloff=all                   " turn off bells
+set showcmd                       " show command line at the bottom
+set wildmenu                      " proper tab completion
+set wildmode=full                 " shoe list of possible completions
+set guifont=Consolas:h11          " gui font and size
+set showmode                      " show current mode always
 
-syntax enable
 
-set ai
-set tabstop=4
-set backspace=indent,eol,start
+""""""""""""""""""""""""""""""""""""
 
-set encoding=utf8
-set ruler
-set number relativenumber
-set wrap
-set belloff=all
-set showcmd
-set wildmenu
-set guifont=Consolas:h11
-
+" auto paranthases colsing
 inoremap ( ()<Left>
 inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")" 
+
+" auto brackets colsing
 inoremap [ []<Left>
 inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]" 
+
+" auto braces colsing
 inoremap { {}<Left>
 inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}" 
 inoremap {<return> {<return>}<Esc>O<Tab>
+
+
+""""""""""""""""""""""""""""""""""""
