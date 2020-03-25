@@ -2,6 +2,14 @@
 # repos to add  #
 #################
 
+add-apt-repository ppa:flexiondotorg/minecraft
+add-apt-repository multiverse
+add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main' 
+add-apt-repository ppa:ubuntuhandbook1/audacity -y
+curl https://download.videolan.org/pub/debian/videolan-apt.asc | sudo apt-key add -
+echo "deb https://download.videolan.org/pub/debian/stable ./" | sudo tee /etc/apt/sources.list.d/libdvdcss.list
+apt install aptitude
 apt update
 
 #################
@@ -99,10 +107,7 @@ apt -y install cmake
 dpkg --add-architecture i386 
 wget -nc https://dl.winehq.org/wine-builds/winehq.key
 apt-key add winehq.key
-apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main' 
-apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ beoan main' 
-apt update
-apt -y install --install-recommends winehq-stable
+aptitude -y install --install-recommends winehq-stable
 
 ### gzip tar
 apt -y install gzip tar
@@ -117,20 +122,54 @@ apt -y install $list
 apt -y install libreoffice
 
 ### vscode
+apt -y install code
 
 ### gvim
+apt -y install vim-gui-common
 
 ### audacity
+apt -y install audacity
 
-# decoders encoders
+### vlc and codecs
+apt -y install vlc*
+apt -y install libdvdcss2 libdvdnav4 libdvdread4
 
 ### ffmpeg
+apt -y install ffmpeg
 
 ### filezilla
+apt -y install filezilla
 
 ### firefox
+apt -y install firefox
 
 ### chrome
+wget -O chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+apt -y install ./chrome.deb
+rm ./chrome.deb
+
+#################
+#     others    #
+#################
+
+### slack
+wget -O slack.deb https://downloads.slack-edge.com/linux_releases/slack-desktop-4.4.0-amd64.deb
+apt -y install ./slack.deb
+rm ./slack.deb
+
+### discord
+wget -O discord.deb https://dl.discordapp.net/apps/linux/0.0.10/discord-0.0.10.deb
+apt -y install ./discord.deb
+rm ./discord.deb
+
+### telegram
+apt -y install telegram-desktop
+
+### steam
+apt -y install steam
+
+### minecraft
+apt -y install minecraft-launcher
 
 #################
 #  engineering  #
@@ -149,18 +188,3 @@ apt -y install libreoffice
 ### my dotfiles
 
 ### themes and looks
-
-
-#################
-#     others    #
-#################
-
-### slack
-
-### discord
-
-### telegram
-
-### steam
-
-### minecraft
