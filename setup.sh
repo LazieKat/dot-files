@@ -123,6 +123,40 @@ apt -y install libreoffice
 
 ### vscode
 apt -y install code
+code --install-extension 13xforever.language-x86-64-assembly
+code --install-extension esbenp.prettier-vscode
+code --install-extension formulahendry.auto-rename-tag
+code --install-extension Gimly81.matlab
+code --install-extension Ikuyadeu.r
+code --install-extension James-Yu.latex-workshop
+code --install-extension mohsen1.prettify-json
+code --install-extension ms-dotnettools.csharp
+code --install-extension ms-python.python
+code --install-extension ms-vscode-remote.remote-wsl
+code --install-extension ms-vscode.cmake-tools
+code --install-extension ms-vscode.cpptools
+code --install-extension ms-vscode.powershell
+code --install-extension nobuhito.printcode
+code --install-extension PKief.material-icon-theme
+code --install-extension platformio.platformio-ide
+code --install-extension pranaygp.vscode-css-peek
+code --install-extension redhat.java
+code --install-extension ritwickdey.LiveServer
+code --install-extension slevesque.vscode-hexdump
+code --install-extension TabNine.tabnine-vscode
+code --install-extension tomoki1207.pdf
+code --install-extension twxs.cmake
+code --install-extension VisualStudioExptTeam.vscodeintellicode
+code --install-extension vsciot-vscode.vscode-arduino
+code --install-extension vscjava.vscode-java-debug
+code --install-extension vscjava.vscode-java-dependency
+code --install-extension vscjava.vscode-java-pack
+code --install-extension vscjava.vscode-java-test
+code --install-extension vscjava.vscode-maven
+code --install-extension vscode-icons-team.vscode-icons
+code --install-extension vscodevim.vim
+code --install-extension yzhang.markdown-all-in-one
+code --install-extension Zignd.html-css-class-completion
 
 ### gvim
 apt -y install vim-gui-common
