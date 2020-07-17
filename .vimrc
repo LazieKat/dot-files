@@ -1,5 +1,5 @@
 set t_Co=256                      " enable 256 color
-colo darkblue                     " set darkblue there
+colo evening                      " set theme
 syntax enable                     " enable syntax highlighting
 set noswapfile                    " no .swp files cuz they're annoying
 set ai                            " enable auto indenting
@@ -18,6 +18,7 @@ set wildmenu                      " proper tab completion
 set wildmode=full                 " shoe list of possible completions
 set guifont=Consolas:h11          " gui font and size
 set showmode                      " show current mode always
+autocmd InsertEnter,InsertLeave * set cul!
 
 
 """"""""""""""""""""""""""""""""""""
@@ -37,3 +38,4 @@ inoremap {<return> {<return>}<Esc>O<Tab>
 
 
 """"""""""""""""""""""""""""""""""""
+nnoremap /<space> :let<space>@/=""<return>
