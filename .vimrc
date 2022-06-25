@@ -9,7 +9,6 @@ Plug 'whatyouhide/vim-gotham'
 Plug 'altercation/vim-colors-solarized'
 Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
-Plug 'psliwka/vim-smoothie'
 Plug 'luochen1990/rainbow'
 Plug 'hzchirs/vim-material'
 
@@ -63,7 +62,6 @@ Plug 'chrisbra/csv.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
-
 """"""""""""""""""""""""""""""""""""
 
 " airline config
@@ -111,6 +109,8 @@ let g:vimwiki_list = [
             \ {'path': '~/OneDrive/Documents/__AAA/wikis/default'}
             \ ]
 
+let g:clang_library_path='/usr/lib/llvm-12/lib/'
+
 """"""""""""""""""""""""""""""""""""
 
 
@@ -134,7 +134,7 @@ set guioptions=c
 set lines=40
 set columns=120
 set updatetime=500
-set guifont=agave_NF:h12          " gui font and size
+set guifont=Monospace\ 14         " gui font and size
 colo OceanicNext                  " set theme
 
 set number relativenumber         " set line numbers to relative
