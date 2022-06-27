@@ -5,6 +5,7 @@ alias bat="batcat"
 
 alias cs="cd ~/OneDrive/AAA/Academics/RU/SAIL"
 alias cr="cd ~/Desktop/ros2_ws"
+alias cdd="cd ~/Desktop"
 
 alias ls='ls --color=auto'
 alias ll='ls -alF'
