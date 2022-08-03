@@ -1,9 +1,9 @@
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 alias v="vim"
-alias bat="batcat"
+# alias bat="batcat"
 
-alias cs="cd ~/OneDrive/AAA/Academics/RU/SAIL"
+alias cs="cd /mnt/c/Users/ahmad/OneDrive/AAA/Academics/RU/SAIL"
 alias cr="cd ~/Desktop/ros2_ws"
 alias cdd="cd ~/Desktop"
 
@@ -21,3 +21,5 @@ alias sb='source ~/.bashrc'
 alias shs='ssh ahmad.zain@sail.ae.ryerson.ca'
 alias sht='ssh ubuntu@192.168.0.103'
 alias shk='ssh lab@192.168.0.111'
+alias shj='ssh uav@141.117.247.49'
+alias shm='ssh azainald@moon.scs.ryerson.ca'

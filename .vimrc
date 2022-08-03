@@ -131,8 +131,8 @@ set wrap                          " wrap long lines
 set showmode                      " show current mode always
 
 set guioptions=c
-set lines=40
-set columns=120
+" set lines=40
+" set columns=120
 set updatetime=500
 set guifont=Monospace\ 14         " gui font and size
 colo OceanicNext                  " set theme
