@@ -17,9 +17,3 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 alias sb='source ~/.bashrc'
-
-alias shs='ssh ahmad.zain@sail.ae.ryerson.ca'
-alias sht='ssh ubuntu@192.168.0.103'
-alias shk='ssh lab@192.168.0.111'
-alias shj='ssh uav@141.117.247.49'
-alias shm='ssh azainald@moon.scs.ryerson.ca'
