@@ -1,11 +1,11 @@
-cp ~/.vimrc  ~/GitHub/dot-files -v
-cp ~/.bashrc ~/GitHub/dot-files -v
-cp ~/.bash_aliases ~/GitHub/dot-files -v
-cp ~/udf.sh ~/GitHub/dot-files -v
+cp ~/.vimrc  ~/Installs/dot-files -v
+cp ~/.bashrc ~/Installs/dot-files -v
+cp ~/.bash_aliases ~/Installs/dot-files -v
+cp ~/udf.sh ~/Installs/dot-files -v
 
 OLD_PWD=$PWD
 
-cd ~/GitHub/dot-files
+cd ~/Installs/dot-files
 git commit -a -m "updated stuff"
 git push
 
