@@ -9,6 +9,7 @@ Plug 'whatyouhide/vim-gotham'
 Plug 'altercation/vim-colors-solarized'
 Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
+Plug 'psliwka/vim-smoothie'
 Plug 'luochen1990/rainbow'
 Plug 'hzchirs/vim-material'
 
@@ -33,6 +34,7 @@ Plug 'mhinz/vim-signify'
 Plug 'Yggdroot/indentLine'
 
 Plug 'godlygeek/tabular'
+Plug 'vim-scripts/Align'
 Plug 'AndrewRadev/switch.vim'
 Plug 'matze/vim-move'
 Plug 'andymass/vim-matchup'
@@ -50,7 +52,6 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
 " sinppets
-Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " file type specific
@@ -62,6 +63,7 @@ Plug 'chrisbra/csv.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
+
 """"""""""""""""""""""""""""""""""""
 
 " airline config
@@ -109,11 +111,9 @@ let g:vimwiki_list = [
             \ {'path': '~/OneDrive/Documents/__AAA/wikis/default'}
             \ ]
 
-let g:clang_library_path='/usr/lib/llvm-12/lib/'
-
 """"""""""""""""""""""""""""""""""""
 
-
+set confirm
 set nocompatible
 set hidden
 set ttyfast
@@ -131,10 +131,11 @@ set wrap                          " wrap long lines
 set showmode                      " show current mode always
 
 set guioptions=c
-" set lines=40
-" set columns=120
+set lines=40
+set columns=95
+set textwidth=80
 set updatetime=500
-set guifont=Monospace\ 14         " gui font and size
+set guifont=Agave_Nerd_Font:h12          " gui font and size
 colo OceanicNext                  " set theme
 
 set number relativenumber         " set line numbers to relative
@@ -158,6 +159,13 @@ autocmd BufReadPost outline set lines=50 | set columns=60
 
 """"""""""""""""""""""""""""""""""""
 
+
+command Cs cd ~/OneDrive/AAA/Academics/RU/SAIL
+command Cd cd ~/OneDrive/Desktop
+
+
+""""""""""""""""""""""""""""""""""
+
 " " auto paranthases colsing
 " inoremap ( ()<Left>
 " inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")" 
@@ -173,9 +181,28 @@ autocmd BufReadPost outline set lines=50 | set columns=60
 nnoremap    <F2>            :NERDTreeToggle<CR> 
 nnoremap    <F3>            :TagbarToggle<CR> 
 nnoremap    <F4>            :UndotreeToggle<CR> 
+
+" easily resource .vimrc and current file
+nnoremap    <Leader>sv      :source ~/.vimrc<CR>
+nnoremap    <Leader>sc      :source %<CR>
+
+
+" to copy an paste with systen
+
+vnoremap    <Leader>d       "+d
+nnoremap    <Leader>d       "+d
+
 vnoremap    <Leader>y       "+y 
+nnoremap    <Leader>y       "+y 
+
 vnoremap    <Leader>p       "+p
 nnoremap    <Leader>p       "+p
+
+vnoremap    <Leader>x       "+x
+nnoremap    <Leader>x       "+x
+
+" for display stuff
+
 nnoremap    <Leader>w       :set wrap!<CR>
 nnoremap    /<space>        :let<space>@/=""<return>
 
@@ -185,4 +212,57 @@ noremap     _
 noremap     +
     \ :let zoomfsize = substitute(&guifont, '^.*:h\([^:]*\).*$', '\1', '') + 1   <CR>
     \ :let &guifont  = substitute(&guifont, ':h\([^:]*\)', ':h' . zoomfsize, '') <CR>
+
+
+""""""""""""""""""""""""""""""""""""""
+
+
+function! g:FindSpaces(current_line)
+    " Define a list to store space positions
+    let s:spaces = []
+
+    " Find all spaces and store their positions
+    let pos = -1
+    while 1
+        let pos = match(a:current_line, ' ', pos + 1)
+        if pos == -1
+            break
+        endif
+        call add(s:spaces, pos)
+    endwhile
+
+    return s:spaces
+endfunction
+
+
+
+
+function! g:LineLine()
+
+    silent! execute line('.').'s/ \s\+//g'
+    silent! execute line('.').'s/\s\+$//g'
+
+    let s:current_line  = getline('.')
+    let s:first_char    = s:current_line[0]
+    let s:space_pos     = FindSpaces(getline('.'))
+    let s:spos_end      = len(s:space_pos) - 1
+
+
+    let s:current_line = substitute(s:current_line, '\%'.(s:space_pos[s:spos_end]+1).'c', ',', '')
+    let s:current_line = substitute(s:current_line, '\%'.(s:space_pos[s:spos_end-1]+1).'c', ',', '')
+
+
+    if s:first_char =~ '\d'
+        let s:current_line = substitute(s:current_line, '\%'.(s:space_pos[0]+1).'c', ',', '')
+        let s:current_line = substitute(s:current_line, '\%'.(s:space_pos[1]+2).'c', ',', '')
+    else
+        let s:current_line = substitute(s:current_line, '\%'.(s:space_pos[2]+1).'c', ',', '')
+        let s:current_line = substitute(s:current_line, '\%'.(s:space_pos[3]+2).'c', ',', '')
+    endif
+
+
+    call setline(line('.'), s:current_line)
+    let @/=""
+
+endfunction
 

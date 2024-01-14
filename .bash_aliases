@@ -3,14 +3,14 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias v="vim"
 # alias bat="batcat"
 
-alias cs="cd /mnt/c/Users/ahmad/OneDrive/AAA/Academics/RU/SAIL"
-alias cr="cd ~/Desktop/ros2_ws"
 alias cdd="cd ~/Desktop"
 
 alias ls='ls --color=auto'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CFhl'
+
+alias bat='batcat'
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'

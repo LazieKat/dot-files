@@ -70,10 +70,14 @@ fi
 
 ###################################################################################################################
 
-export PATH=$HOME/.local/bin:/usr/games/bin/:$PATH
+export PATH=$HOME/.local/bin:/usr/games/bin/:$HOME/Installs/BambuStudio/install_dir/bin:$PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 export BAT_PAGER=""
-export ROS_DOMAIN_ID=30
 
-source /opt/ros/foxy/setup.bash
-source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash 
+
+## ROS STUFF ###################################
+
+#export ROS_DOMAIN_ID=30
+
+#source /opt/ros/foxy/setup.bash
+#source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
