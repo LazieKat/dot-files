@@ -79,5 +79,5 @@ export BAT_PAGER=""
 
 #export ROS_DOMAIN_ID=30
 
-#source /opt/ros/foxy/setup.bash
-#source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+source /opt/ros/humble/setup.bash
+source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash 

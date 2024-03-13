@@ -17,3 +17,8 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 alias sb='source ~/.bashrc'
+alias sr='source /opt/ros/humble/setup.bash'
+
+alias c='clear'
+
+alias push-dot='~/Installs/dot-files/udf.sh'

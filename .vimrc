@@ -214,7 +214,7 @@ noremap     +
     \ :let &guifont  = substitute(&guifont, ':h\([^:]*\)', ':h' . zoomfsize, '') <CR>
 
 
-""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""
 
 
 function! g:FindSpaces(current_line)
@@ -266,3 +266,4 @@ function! g:LineLine()
 
 endfunction
 
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
