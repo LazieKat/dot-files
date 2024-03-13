@@ -77,7 +77,8 @@ export BAT_PAGER=""
 
 ## ROS STUFF ###################################
 
-#export ROS_DOMAIN_ID=30
 
+export ROS_DOMAIN_ID=30
 source /opt/ros/humble/setup.bash
 source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash 
+export ROS_DOMAIN_ID=30
