@@ -16,6 +16,7 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
+alias s='source'
 alias sb='source ~/.bashrc'
 alias sr='source /opt/ros/humble/setup.bash'
 
