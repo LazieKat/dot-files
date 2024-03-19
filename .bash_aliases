@@ -13,6 +13,10 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias  l='ls -CFhl'
 
+alias  t='tree -F'
+alias td='tree -dF'
+alias ta='tree -aF'
+
 alias   c='clear'
 alias clc='clear'
 
