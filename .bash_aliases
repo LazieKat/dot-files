@@ -13,7 +13,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias  l='ls -CFhl'
 
-alias c='clear'
+alias   c='clear'
+alias clc='clear'
 
 alias push-dot='~/Installs/dot-files/udf.sh'
 
