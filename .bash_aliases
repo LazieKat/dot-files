@@ -21,6 +21,7 @@ alias   c='clear'
 alias clc='clear'
 
 alias push-dot='~/Installs/dot-files/udf.sh'
+alias pull-dot='~/Installs/dot-files/pdf.sh'
 
 
 
