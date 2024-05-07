@@ -26,7 +26,7 @@ alias pull-dot='~/Installs/dot-files/pdf.sh'
 
 
 alias cdd='cd ~/Desktop'
-alias cdr='cd ~/ros2_ws'
+alias cdr='cd ~/ROS_WSS'
 
 
 
