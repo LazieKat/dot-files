@@ -3,6 +3,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias v='vim'
 
 alias bat='batcat'
+alias nf='neofetch'
 
 alias  grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -26,8 +27,12 @@ alias pull-dot='~/Installs/dot-files/pdf.sh'
 
 
 alias cdd='cd ~/Desktop'
+<<<<<<< HEAD
 alias cdr='cd ~/ros2_ws'
 alias cdp='cd ~/Installs/PX4-Autopilot'
+=======
+alias cdr='cd ~/ROS_WSS'
+>>>>>>> 52ad533a1fee4dd2b75b416a5ca67c1769dc7303
 
 
 
