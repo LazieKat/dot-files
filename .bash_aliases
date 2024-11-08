@@ -25,10 +25,10 @@ alias pull-dot='~/Installs/dot-files/pdf.sh'
 
 
 
-alias  cdd='cd ~/Desktop'
-alias  cdr='cd ~/ros2_ws'
-alias  cdp='cd ~/Installs/PX4-Autopilot'
-alias cdpu='cd ~/Installs/PX4-Autopilot-UNMODIEFIED/PX4-Autopilot'
+alias cdd='cd ~/Desktop'
+alias cdr='cd ~/ros2_ws'
+alias cdp='cd ~/Installs/PX4-Autopilot'
+alias cdy='cd ~/Installs/YAPR'
 
 
 alias   s='source'
