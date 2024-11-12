@@ -38,4 +38,4 @@ alias  sr='source /opt/ros/humble/setup.bash'
 alias slr='source ./install/local_setup.bash'
 
 
-alias qgc='nohup ~/Installs/QGC/QGroundControl.AppImage &'
+alias qgc='nohup ~/Installs/QGC/QGroundControl.AppImage > /dev/null 2>&1 &'
