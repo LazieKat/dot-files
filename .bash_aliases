@@ -30,8 +30,12 @@ alias cdr='cd ~/ros2_ws'
 alias cdp='cd ~/Installs/PX4-Autopilot'
 alias cdy='cd ~/Installs/YAPR'
 
+alias tup='top -u $USER'
 
 alias   s='source'
 alias  sb='source ~/.bashrc'
 alias  sr='source /opt/ros/humble/setup.bash'
 alias slr='source ./install/local_setup.bash'
+
+
+alias qgc='nohup ~/Installs/QGC/QGroundControl.AppImage &'
