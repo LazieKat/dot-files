@@ -2,7 +2,6 @@ call plug#begin('~/vimfiles/bundle')
 
 " themes and style
 "Plug 'arcticicestudio/nord-vim'
-"Plug 'vim-airline/vim-airline-themes'
 "Plug 'tomasiser/vim-code-dark'
 Plug 'mhartington/oceanic-next'
 "Plug 'whatyouhide/vim-gotham'
@@ -12,6 +11,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'psliwka/vim-smoothie'
 Plug 'luochen1990/rainbow'
 "Plug 'hzchirs/vim-material'
+Plug 'vim-airline/vim-airline-themes'
 
 " VimShell
 "Plug 'Shougo/vimshell.vim'
@@ -67,11 +67,8 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""
 
 " airline config
-"let g:airline_theme='durant'
-"let g:airline_theme='dark'
-"let g:airline_theme='cool'
 let g:airline_powerline_fonts              = 1
-let g:airline_theme                        = 'ayu_mirage'
+let g:airline_theme                        = 'dark'
 let g:airline#extensions#tabline#enabled   = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
@@ -130,10 +127,12 @@ set ruler                         " show curent position
 set wrap                          " wrap long lines
 set showmode                      " show current mode always
 
-set guioptions=c
-set lines=40
-set columns=95
-set textwidth=80
+if has('gui_running')
+    set guioptions=c
+    set lines=40
+    set columns=95
+endif
+
 set updatetime=500
 set guifont=Agave_Nerd_Font:h12          " gui font and size
 colo OceanicNext                  " set theme
