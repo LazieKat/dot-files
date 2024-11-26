@@ -1,29 +1,29 @@
 call plug#begin('~/vimfiles/bundle')
 
 " themes and style
-Plug 'arcticicestudio/nord-vim'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'tomasiser/vim-code-dark'
+"Plug 'arcticicestudio/nord-vim'
+"Plug 'vim-airline/vim-airline-themes'
+"Plug 'tomasiser/vim-code-dark'
 Plug 'mhartington/oceanic-next'
-Plug 'whatyouhide/vim-gotham'
-Plug 'altercation/vim-colors-solarized'
+"Plug 'whatyouhide/vim-gotham'
+"Plug 'altercation/vim-colors-solarized'
 Plug 'ryanoasis/vim-devicons'
-Plug 'mhinz/vim-startify'
+"Plug 'mhinz/vim-startify'
 Plug 'psliwka/vim-smoothie'
 Plug 'luochen1990/rainbow'
-Plug 'hzchirs/vim-material'
+"Plug 'hzchirs/vim-material'
 
 " VimShell
-Plug 'Shougo/vimshell.vim'
-Plug 'Shougo/vimproc.vim'
+"Plug 'Shougo/vimshell.vim'
+"Plug 'Shougo/vimproc.vim'
 
 " organization
 Plug 'preservim/nerdtree'
 Plug 'preservim/tagbar'
 Plug 'mbbill/undotree'
-Plug 'itchyny/calendar.vim'
-Plug 'vimwiki/vimwiki'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+"Plug 'itchyny/calendar.vim'
+"Plug 'vimwiki/vimwiki'
+"Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'junegunn/fzf'
@@ -40,7 +40,7 @@ Plug 'matze/vim-move'
 Plug 'andymass/vim-matchup'
 Plug 'mg979/vim-visual-multi'
 
-Plug 'junegunn/vim-easy-align'
+"Plug 'junegunn/vim-easy-align'
 Plug 'preservim/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Jorengarenar/vim-MvVis'
@@ -102,14 +102,14 @@ let g:indentLine_leadingSpaceChar = '.'
 let g:indentLine_leadingSpaceEnabled = '1'
 
 " vim-startify confid
-let g:startify_bookmarks = [
-    \ '~/.vimrc'
-    \ ]
+"let g:startify_bookmarks = [
+"    \ '~/.vimrc'
+"    \ ]
 
 " vimwiki directory
-let g:vimwiki_list = [
-            \ {'path': '~/OneDrive/Documents/__AAA/wikis/default'}
-            \ ]
+"let g:vimwiki_list = [
+"            \ {'path': '~/OneDrive/Documents/__AAA/wikis/default'}
+"            \ ]
 
 """"""""""""""""""""""""""""""""""""
 
