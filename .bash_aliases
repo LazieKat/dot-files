@@ -37,5 +37,6 @@ alias  sb='source ~/.bashrc'
 alias  sr='source /opt/ros/humble/setup.bash'
 alias slr='source ./install/local_setup.bash'
 
+alias sai='sudo apt install'
 
 alias qgc='nohup ~/Installs/QGC/QGroundControl.AppImage > /dev/null 2>&1 &'
