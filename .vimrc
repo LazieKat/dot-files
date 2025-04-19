@@ -1,67 +1,65 @@
 call plug#begin('~/vimfiles/bundle')
 
+
 " themes and style
-"Plug 'arcticicestudio/nord-vim'
-"Plug 'tomasiser/vim-code-dark'
-Plug 'mhartington/oceanic-next'
-"Plug 'whatyouhide/vim-gotham'
-"Plug 'altercation/vim-colors-solarized'
-Plug 'ryanoasis/vim-devicons'
-"Plug 'mhinz/vim-startify'
-Plug 'psliwka/vim-smoothie'
 Plug 'luochen1990/rainbow'
-"Plug 'hzchirs/vim-material'
-Plug 'vim-airline/vim-airline-themes'
-
-" VimShell
-"Plug 'Shougo/vimshell.vim'
-"Plug 'Shougo/vimproc.vim'
-
-" organization
-Plug 'preservim/nerdtree'
-Plug 'preservim/tagbar'
-Plug 'mbbill/undotree'
-"Plug 'itchyny/calendar.vim'
-"Plug 'vimwiki/vimwiki'
-"Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-
-Plug 'vim-ctrlspace/vim-ctrlspace'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-
-Plug 'vim-airline/vim-airline'
+Plug 'mhartington/oceanic-next'
 Plug 'mhinz/vim-signify'
+Plug 'psliwka/vim-smoothie'
+Plug 'ryanoasis/vim-devicons'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'Yggdroot/indentLine'
 
-Plug 'godlygeek/tabular'
-Plug 'vim-scripts/Align'
-Plug 'AndrewRadev/switch.vim'
-Plug 'matze/vim-move'
-Plug 'andymass/vim-matchup'
-Plug 'mg979/vim-visual-multi'
 
-"Plug 'junegunn/vim-easy-align'
-"Plug 'preservim/nerdcommenter'
+" navigation and organization
+Plug 'godlygeek/tabular'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'matze/vim-move'
+Plug 'mbbill/undotree'
+Plug 'mg979/vim-visual-multi'
+Plug 'preservim/nerdtree'
+Plug 'preservim/tagbar'
+Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
-Plug 'Jorengarenar/vim-MvVis'
 
-Plug 'rhysd/vim-grammarous'
+
+" sinppets
+Plug 'honza/vim-snippets'
+
+
+" file type specific
+Plug 'chrisbra/csv.vim'
+
+
+" language servers
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 
 " focus
 Plug 'junegunn/goyo.vim' 
 Plug 'junegunn/limelight.vim'
 
-" sinppets
-Plug 'honza/vim-snippets'
 
-" file type specific
-Plug 'chrisbra/csv.vim'
-
-" IDE-like features
+" recheck
 "Plug 'vim-syntastic/syntastic'
 "Plug 'dense-analysis/ale'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'Shougo/vimproc.vim'
+"Plug 'Shougo/vimshell.vim'
+"Plug 'AndrewRadev/switch.vim'
+"Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+"Plug 'itchyny/calendar.vim'
+"Plug 'vimwiki/vimwiki'
+"Plug 'andymass/vim-matchup'
+"Plug 'junegunn/vim-easy-align'
+
+
+" removed
+"Plug 'mhinz/vim-startify'
+"Plug 'rhysd/vim-grammarous'
+
 
 call plug#end()
 
@@ -76,15 +74,23 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 " rainbow brackets
 let g:rainbow_active = 1
 
-" syntastic config
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+" vim-move
+let g:move_key_modifier = 'C'
+let g:move_key_modifier_visualmode = 'S'
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list            = 1
-let g:syntastic_check_on_open            = 1
-let g:syntastic_check_on_wq              = 0
+" indentline config
+let g:indentLine_char = '¦'
+let g:indentLine_leadingSpaceChar = '.'
+let g:indentLine_leadingSpaceEnabled = '1'
+
+" syntastic config
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list            = 1
+" let g:syntastic_check_on_open            = 1
+" let g:syntastic_check_on_wq              = 0
 
 " switch config
 " let g:switch_mapping = "gs"
@@ -93,11 +99,6 @@ let g:syntastic_check_on_wq              = 0
 
 " nerdcommenter config
 " let g:NERDSpaceDelims = 1
-
-" indentline config
-let g:indentLine_char = '|'
-let g:indentLine_leadingSpaceChar = '.'
-let g:indentLine_leadingSpaceEnabled = '1'
 
 " vim-startify confid
 "let g:startify_bookmarks = [
@@ -117,7 +118,7 @@ set nocompatible
 set hidden
 set ttyfast
 set termguicolors
-set encoding=UTF-8                " 
+set encoding=UTF-8
 set noswapfile                    " no .swp files cuz they're annoying
 set belloff=all                   " turn off bells
 set showcmd                       " show command line at the bottom
