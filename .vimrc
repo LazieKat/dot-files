@@ -120,7 +120,6 @@ set noswapfile                    " no .swp files cuz they're annoying
 set belloff=all                   " turn off bells
 set showcmd                       " show command line at the bottom
 set mouse=a
-"set shell=powershell
 syntax enable                     " enable syntax highlighting
 
 set ruler                         " show curent position
@@ -149,33 +148,20 @@ set showmatch                     " show matching brackets
 set incsearch                     " show search results while typing
 set hlsearch                      " highlight search results
 
+set complete+=kspell              " add spelling to auto complete
+
 set wildmenu                      " proper tab completion
-set wildmode=full                 " shoe list of possible completions
+set wildmode=full                 " show list of possible completions
+
 
 autocmd InsertEnter,InsertLeave * set cul!
-autocmd BufReadPost assignments set lines=50 | set columns=60
-autocmd BufReadPost outline set lines=50 | set columns=60
+
+" autocmd BufReadPost assignments set lines=50 | set columns=60
+" autocmd BufReadPost outline set lines=50 | set columns=60
+
 
 """"""""""""""""""""""""""""""""""""
 
-
-command Cs cd ~/OneDrive/AAA/Academics/RU/SAIL
-command Cd cd ~/OneDrive/Desktop
-
-
-""""""""""""""""""""""""""""""""""
-
-" " auto paranthases colsing
-" inoremap ( ()<Left>
-" inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")" 
-" " auto brackets colsing
-" inoremap [ []<Left>
-" inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]" 
-
-" " auto braces colsing
-" inoremap { {}<Left>
-" inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}" 
-" inoremap {<return> {<return>}<Esc>O<Tab>
 
 nnoremap    <F2>            :NERDTreeToggle<CR> 
 nnoremap    <F3>            :TagbarToggle<CR> 
@@ -215,54 +201,5 @@ noremap     +
 
 """""""""""""""""""""""""""""""""""""
 
-
-function! g:FindSpaces(current_line)
-    " Define a list to store space positions
-    let s:spaces = []
-
-    " Find all spaces and store their positions
-    let pos = -1
-    while 1
-        let pos = match(a:current_line, ' ', pos + 1)
-        if pos == -1
-            break
-        endif
-        call add(s:spaces, pos)
-    endwhile
-
-    return s:spaces
-endfunction
-
-
-
-
-function! g:LineLine()
-
-    silent! execute line('.').'s/ \s\+//g'
-    silent! execute line('.').'s/\s\+$//g'
-
-    let s:current_line  = getline('.')
-    let s:first_char    = s:current_line[0]
-    let s:space_pos     = FindSpaces(getline('.'))
-    let s:spos_end      = len(s:space_pos) - 1
-
-
-    let s:current_line = substitute(s:current_line, '\%'.(s:space_pos[s:spos_end]+1).'c', ',', '')
-    let s:current_line = substitute(s:current_line, '\%'.(s:space_pos[s:spos_end-1]+1).'c', ',', '')
-
-
-    if s:first_char =~ '\d'
-        let s:current_line = substitute(s:current_line, '\%'.(s:space_pos[0]+1).'c', ',', '')
-        let s:current_line = substitute(s:current_line, '\%'.(s:space_pos[1]+2).'c', ',', '')
-    else
-        let s:current_line = substitute(s:current_line, '\%'.(s:space_pos[2]+1).'c', ',', '')
-        let s:current_line = substitute(s:current_line, '\%'.(s:space_pos[3]+2).'c', ',', '')
-    endif
-
-
-    call setline(line('.'), s:current_line)
-    let @/=""
-
-endfunction
-
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <silent><expr> <CR>
+    \ coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
