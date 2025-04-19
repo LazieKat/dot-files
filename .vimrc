@@ -41,7 +41,8 @@ Plug 'andymass/vim-matchup'
 Plug 'mg979/vim-visual-multi'
 
 "Plug 'junegunn/vim-easy-align'
-Plug 'preservim/nerdcommenter'
+"Plug 'preservim/nerdcommenter'
+Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Jorengarenar/vim-MvVis'
 
@@ -110,6 +111,7 @@ let g:indentLine_leadingSpaceEnabled = '1'
 
 """"""""""""""""""""""""""""""""""""
 
+filetype plugin indent on
 set confirm
 set nocompatible
 set hidden
