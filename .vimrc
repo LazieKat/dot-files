@@ -14,6 +14,7 @@ Plug 'Yggdroot/indentLine'
 
 " navigation and organization
 Plug 'godlygeek/tabular'
+Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'matze/vim-move'
@@ -21,13 +22,15 @@ Plug 'mbbill/undotree'
 Plug 'mg979/vim-visual-multi'
 Plug 'preservim/nerdtree'
 Plug 'preservim/tagbar'
-Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'tpope/vim-commentary'
-Plug 'jiangmiao/auto-pairs'
+Plug 'vim-ctrlspace/vim-ctrlspace'
 
 
 " sinppets
+Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
+Plug 'marcweber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
 
 
 " file type specific
@@ -44,16 +47,16 @@ Plug 'junegunn/limelight.vim'
 
 
 " recheck
-"Plug 'vim-syntastic/syntastic'
-"Plug 'dense-analysis/ale'
+"Plug 'AndrewRadev/switch.vim'
 "Plug 'Shougo/vimproc.vim'
 "Plug 'Shougo/vimshell.vim'
-"Plug 'AndrewRadev/switch.vim'
+"Plug 'andymass/vim-matchup'
+"Plug 'dense-analysis/ale'
 "Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 "Plug 'itchyny/calendar.vim'
-"Plug 'vimwiki/vimwiki'
-"Plug 'andymass/vim-matchup'
 "Plug 'junegunn/vim-easy-align'
+"Plug 'vim-syntastic/syntastic'
+"Plug 'vimwiki/vimwiki'
 
 
 " removed
