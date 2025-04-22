@@ -207,5 +207,13 @@ noremap     +
 
 """""""""""""""""""""""""""""""""""""
 
+function Cocpumconfirmmine()
+    try
+        return coc#pum#visible()
+    catch /.*/
+        return 0
+    endtry
+endfunction
+
 inoremap <silent><expr> <CR>
-    \ coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+    \ Cocpumconfirmmine() ? coc#pum#confirm() : "\<CR>"
