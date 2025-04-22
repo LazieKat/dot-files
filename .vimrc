@@ -38,7 +38,7 @@ Plug 'chrisbra/csv.vim'
 
 
 " language servers
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'commit': '0ba0b8b'}
 
 
 " focus
