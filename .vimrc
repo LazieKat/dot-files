@@ -126,6 +126,8 @@ function CocSyncSetup()
         \ "coc-vimlsp",
         \ "coc-pyright"
         \ ])
+
+    echomsg "Coc Extensions Synced"
 endfunction
 
 
