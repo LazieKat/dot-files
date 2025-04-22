@@ -1,3 +1,7 @@
+"""""""""""""""""""""""""""""""""""""
+"    Vim-Plug Plugins
+"""""""""""""""""""""""""""""""""""""
+
 call plug#begin('~/vimfiles/bundle')
 
 
@@ -66,7 +70,68 @@ Plug 'junegunn/limelight.vim'
 
 call plug#end()
 
-""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+"   Coc Extensions
+"""""""""""""""""""""""""""""""""""""
+
+function CocPumConfirm()
+    try
+        return coc#pum#visible()
+    catch /.*/
+        return 0
+    endtry
+endfunction
+
+
+function CocMakeExtensionsList()
+    let stats = CocAction("extensionStats")
+    let g:coc_my_installed_extensions = []
+
+    for ext in stats
+        call add(g:coc_my_installed_extensions, ext['id'])
+    endfor
+endfunction
+
+
+function CocIsInstalled(name)
+    return index(g:coc_my_installed_extensions, a:name) != -1
+endfunction
+
+
+function CocInstallExtensions(names)
+    for ext in a:names
+        if !CocIsInstalled(ext)
+            let ch = input("Coc: Extension '" . ext . "' is not installed. Do you want to install it? [Y,n] ")
+            let ch = ch[0]
+            echo "\n"
+
+            if ch == 'y' || ch == ''
+                echo "Installing..."
+                execute 'CocInstall ' . ext
+            else
+                echo "Aborting install..."
+            endif
+        endif
+    endfor
+endfunction
+
+
+function CocSyncSetup()
+    call CocMakeExtensionsList()
+
+    call CocInstallExtensions([ 
+        \ "coc-marketplace",
+        \ "coc-clangd",
+        \ "coc-vimlsp",
+        \ "coc-pyright"
+        \ ])
+endfunction
+
+
+"""""""""""""""""""""""""""""""""""""
+"    Plugins Config
+"""""""""""""""""""""""""""""""""""""
 
 " airline config
 let g:airline_powerline_fonts              = 1
@@ -86,34 +151,10 @@ let g:indentLine_char = '¦'
 let g:indentLine_leadingSpaceChar = '.'
 let g:indentLine_leadingSpaceEnabled = '1'
 
-" syntastic config
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list            = 1
-" let g:syntastic_check_on_open            = 1
-" let g:syntastic_check_on_wq              = 0
 
-" switch config
-" let g:switch_mapping = "gs"
-" let g:switch_custom_definitions = []
-" autocmd FiletType <whatever> let b:switch_custom_definitions = []
-
-" nerdcommenter config
-" let g:NERDSpaceDelims = 1
-
-" vim-startify confid
-"let g:startify_bookmarks = [
-"    \ '~/.vimrc'
-"    \ ]
-
-" vimwiki directory
-"let g:vimwiki_list = [
-"            \ {'path': '~/OneDrive/Documents/__AAA/wikis/default'}
-"            \ ]
-
-""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""
+"    Vim Settings
+"""""""""""""""""""""""""""""""""""""
 
 filetype plugin indent on
 set confirm
@@ -139,7 +180,7 @@ if has('gui_running')
 endif
 
 set updatetime=500
-set guifont=Agave_Nerd_Font:h12          " gui font and size
+set guifont=Agave_Nerd_Font:h12   " gui font and size
 colo OceanicNext                  " set theme
 
 set number relativenumber         " set line numbers to relative
@@ -162,12 +203,10 @@ set wildmode=full                 " show list of possible completions
 
 autocmd InsertEnter,InsertLeave * set cul!
 
-" autocmd BufReadPost assignments set lines=50 | set columns=60
-" autocmd BufReadPost outline set lines=50 | set columns=60
 
-
-""""""""""""""""""""""""""""""""""""
-
+"""""""""""""""""""""""""""""""""""""
+"   Remappings
+"""""""""""""""""""""""""""""""""""""
 
 nnoremap    <F2>            :NERDTreeToggle<CR> 
 nnoremap    <F3>            :TagbarToggle<CR> 
@@ -178,8 +217,7 @@ nnoremap    <Leader>sv      :source ~/.vimrc<CR>
 nnoremap    <Leader>sc      :source %<CR>
 
 
-" to copy an paste with systen
-
+" to copy an paste with systen (Doesn't work with WSL)
 vnoremap    <Leader>d       "+d
 nnoremap    <Leader>d       "+d
 
@@ -192,8 +230,8 @@ nnoremap    <Leader>p       "+p
 vnoremap    <Leader>x       "+x
 nnoremap    <Leader>x       "+x
 
-" for display stuff
 
+" for display stuff
 nnoremap    <Leader>w       :set wrap!<CR>
 nnoremap    /<space>        :let<space>@/=""<return>
 
@@ -205,15 +243,6 @@ noremap     +
     \ :let &guifont  = substitute(&guifont, ':h\([^:]*\)', ':h' . zoomfsize, '') <CR>
 
 
-"""""""""""""""""""""""""""""""""""""
-
-function Cocpumconfirmmine()
-    try
-        return coc#pum#visible()
-    catch /.*/
-        return 0
-    endtry
-endfunction
-
+" for autocomplete
 inoremap <silent><expr> <CR>
-    \ Cocpumconfirmmine() ? coc#pum#confirm() : "\<CR>"
+    \ CocPumConfirm() ? coc#pum#confirm() : "\<CR>"
