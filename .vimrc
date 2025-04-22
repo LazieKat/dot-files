@@ -124,11 +124,14 @@ function CocSyncSetup()
         \ "coc-marketplace",
         \ "coc-clangd",
         \ "coc-vimlsp",
-        \ "coc-pyright"
+        \ "coc-pyright",
+        \ "coc-sh"
         \ ])
 
     echomsg "Coc Extensions Synced"
 endfunction
+
+command CocSyncSetup call CocSyncSetup()
 
 
 """""""""""""""""""""""""""""""""""""
