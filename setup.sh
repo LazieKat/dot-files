@@ -219,6 +219,8 @@ apt -y install minecraft-launcher
 #     config    #
 #################
 
+apt -y fzf suckless-tools fff
+
 ### my dotfiles
 
 ### themes and looks

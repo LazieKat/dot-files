@@ -103,8 +103,16 @@ bind 'TAB:menu-complete'
 bind '"\e[Z":menu-complete-backward'
 
 ## BASH CUSTOMIZATION ##########################
-#
+
 f() {
     fff "$@"
     cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
 }
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+source ~/Installs/fzf-tab-completion/bash/fzf-bash-completion.sh
+bind -x '"\t": fzf_bash_completion'
+FZF_TAB_COMPLETION_PROMPT='> '
+FZF_COMPLETION_AUTO_COMMON_PREFIX=true
+FZF_DEFAULT_OPTS="--style full --height 40%"
