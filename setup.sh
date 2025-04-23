@@ -77,12 +77,20 @@ print_result(){
 
 
 apt_install() {
-    echo "------------------ apt_install $1" >> "$LOG_FILE"
-    printf "[  ....  ] Installing: %s\r" "$1"
-    sudo apt-get install "$1" -y >> $LOG_FILE
-    r=$?
-    printf "[  ....  ] Installing: %s" "$1"
-    print_result 0 $r
+    for elem in "$@"; do
+        echo "------------------ apt_install $elem" >> "$LOG_FILE"
+        printf "[  ....  ] Installing: %s\r" "$elem"
+        dpkg-query -W -f='${Status}' "$elem" 2>/dev/null | grep -q "install ok installed"
+        if [ $? -eq 0 ]; then
+            printf "[  ....  ] Already installed: %s" "$elem"
+            print_result 0 0
+            continue
+        fi
+        sudo apt-get install "$elem" -y >> $LOG_FILE
+        r=$?
+        printf "[  ....  ] Installing: %s" "$elem"
+        print_result 0 $r
+    done
 }
 
 
@@ -155,21 +163,25 @@ fi
 if [ $gen_tools -eq 1 ]; then
     printf "\n --- General Tools --- \n"
 
-    apt_install gzip
-    apt_install unzip
-    apt_install zip
-    apt_install tar
-    apt_install curl
-    apt_install git
-    apt_install tree
-    apt_install vim
+    packs=(
+        gzip
+        unzip
+        zip
+        tar
+        curl
+        git
+        tree
+        vim
 
-    apt_install ffmpeg
-    apt_install suckless-tools
-    apt_install pandoc
-    apt_install poppler-utils
-    apt_install ranger
-    apt_install screenfetch
+        ffmpeg
+        suckless-tools
+        pandoc
+        poppler-utils
+        ranger
+        screenfetch
+    )
+    
+    apt_install "${packs[@]}"
 fi
 
 
@@ -180,47 +192,51 @@ fi
 if [ $dev_tools -eq 1 ]; then
     printf "\n --- Development --- \n"
 
-    apt_install python3.12-full
-    apt_install python3.12-dev
-    # apt_install python3.12-doc
-    apt_install python3.12-dbg
-    apt_install python-is-python3
+    packs=(
+        python3.12-full
+        python3.12-dev
+        # python3.12-doc
+        python3.12-dbg
+        python-is-python3
 
-    apt_install build-essential
-    apt_install manpages-dev
-    apt_install glibc-tools
-    apt_install binutils-dev
-    apt_install clang
-    apt_install clangd
-    apt_install nasm
-     
-    apt_install libboost-all-dev
-    apt_install freeglut3-dev
-    apt_install libglfw3-dev
-    apt_install libsfml-dev
-    apt_install libsdl2-dev
-    apt_install libgl1-mesa-dev
+        build-essential
+        manpages-dev
+        glibc-tools
+        binutils-dev
+        clang
+        clangd
+        nasm
 
-    apt_install default-jre
-    apt_install default-jdk
-    apt_install default-jdk-doc
+        libboost-all-dev
+        freeglut3-dev
+        libglfw3-dev
+        libsfml-dev
+        libsdl2-dev
+        libgl1-mesa-dev
 
-    apt_install openjdk-21-jre
-    apt_install openjdk-21-jdk
-    apt_install openjdk-21-dbg
-    apt_install openjdk-21-doc
-    apt_install openjdk-21-source
+        default-jre
+        default-jdk
+        default-jdk-doc
 
-    apt_install octave
-    apt_install sbcl
+        openjdk-21-jre
+        openjdk-21-jdk
+        openjdk-21-dbg
+        openjdk-21-doc
+        openjdk-21-source
 
-    apt_install cmake
-    apt_install make
+        octave
+        sbcl
 
-    apt_install bison
-    apt_install flex
+        cmake
+        make
 
-    # RUST 
+        bison
+        flex
+    )
+
+    apt_install "${packs[@]}"
+
+    # RUST
         curl_download https://sh.rustup.rs /tmp/rust.sh
         printf "[  ....  ] Installing rust\r"
         bash /tmp/rust.sh -y >> $LOG_FILE 2>&1
@@ -268,11 +284,15 @@ if [ $desktop -eq 1 ]; then
     curl_download "https://discord.com/api/download?platform=linux&format=deb" /tmp/discord.deb
     apt_install /tmp/discord.deb
 
-    apt_install libreoffice
-    apt_install vim-gui-common
 
-    apt_install vlc*
-    apt_install audacity
+    packs=(
+        libreoffice
+        vim-gui-common
+        vlc*
+        audacity
+    )
+
+    apt_install "${packs[@]}"
 fi
 
 
