@@ -132,11 +132,11 @@ printf "\n---------------------------------------------------\n\n" >> $LOG_FILE
 #############################################
 
 if [ $repos -eq 1 ]; then
-    # printf "\n --- Add Repos --- \n"
+    printf "\n --- Add Repos --- \n"
 
-    # apt_add_repo ppa:jonathonf/vim
-    # apt_add_repo ppa:deadsnakes/ppa
-    # apt_add_repo ppa:ubuntuhandbook1/audacity
+    apt_add_repo ppa:jonathonf/vim
+    apt_add_repo ppa:deadsnakes/ppa
+    apt_add_repo ppa:ubuntuhandbook1/audacity
     true
 fi
 
