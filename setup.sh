@@ -172,6 +172,7 @@ if [ $gen_tools -eq 1 ]; then
         git
         tree
         vim
+        bat
 
         ffmpeg
         suckless-tools
