@@ -1,226 +1,280 @@
-#################
-# repos to add  #
-#################
+#
+#~~~~~~   Constants  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
 
-add-apt-repository ppa:flexiondotorg/minecraft
-add-apt-repository multiverse
-add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main' 
-add-apt-repository ppa:ubuntuhandbook1/audacity -y
-curl https://download.videolan.org/pub/debian/videolan-apt.asc | sudo apt-key add -
-echo "deb https://download.videolan.org/pub/debian/stable ./" | sudo tee /etc/apt/sources.list.d/libdvdcss.list
-apt install aptitude
-apt update
 
-#################
-#  development  #
-#################
+COLOR_GREEN="\e[1;32m"
+COLOR_RED="\e[1;31m"
+COLOR_DEFAULT="\e[0m"
 
-### python3
-apt -y install python3 python3-dev python3-pip python3-venv
+LOG_FILE=~/dot_install_log
 
-# tkinter pygame numpy scipy pandas matplotlib opencv pytorch tensorflow
-apt -y install python3-tk python3-opencv
-pip3 install sympy pygame numpy scipy pandas matplotlib torch torchvision tensorflow
+START_DIR=$PWD
 
-# django flask bottle pyramid
-pip3 install Django Flask bottle pyramid
+repos=0
+gen_tools=0
+dev_tools=0
+installs_folder=0
+desktop=0
+update_apt=1
 
-### c/c++
-apt -y install build-essential manpages-dev libgl1-mesa-dev
-apt -y install libboost-all-dev
+while getopts "rgdiku" opt; do
+    case "$opt" in
+        r)
+            repos=1;;
+        g)
+            gen_tools=1;;
+        d)
+            dev_tools=1;;
+        i)
+            installs_folder=1;;
+        k)
+            desktop=1;;
+        u)
+            update_apt=0;;
+        *)
+            ;;
+    esac
+done
 
-# opengl sfml sdl glfw
-apt -y xorg-dev
-apt -y install freeglut3-dev
-apt -y install libglfw3-dev
-apt -y install libsfml-dev
-apt -y install libsdl2-dev
+if (( (repos + gen_tools + dev_tools + installs_folder + desktop) == 0 )); then
+    echo "No arguments were provided"
+    echo "Usage: setup.sh [options...]"
+    echo " -r,  Add repos"
+    echo " -g,  General tools"
+    echo " -d,  Development tools"
+    echo " -i,  My 'Installs' folder"
+    echo " -k,  Desktop apps (with GUIs)"
+    echo " -u,  Skip 'apt update'"
 
-### arduino
-apt -y install arduino arduino-core
+    exit
+fi
 
-# avr
-apt -y install gcc-avr avr-libc binutils-avr gdb-avr avrdude
 
-### matlab octave
-apt -y install octave
 
-### java
-apt -y install default-jdk
+#
+#~~~~~~   Helper Functions  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
 
-### .net and asp.net core
-wget https://packages.microsoft.com/config/ubuntu/19.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-dpkg -i packages-microsoft-prod.deb
-rm packages-microsoft-prod.deb 
-apt -y install apt-transport-https
-apt update
-apt -y install dotnet-sdk-3.1
-apt -y install mono-complete
 
-### android sdk
-apt -y install android-sdk
+print_done(){
+    printf "\r[$COLOR_GREEN  Done  $COLOR_DEFAULT]\n"
+}
 
-### node.js
-apt -y install nodejs npm
 
-### r r-markdown
-apt -y install r-base
-Rscript -e "install.packages(\"rmarkdown\")"
+print_failed(){
+    printf "\r[$COLOR_RED Failed $COLOR_DEFAULT]\n"
+}
 
-### LAMP (linux, apache, mysql, php)
-apt -y install apache2-dev
-#apt -y install apache2
-apt -y install mysql-server
-apt -y install php libapache2-mod-php
 
-### rust
-apt -y install curl
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source $HOME/.cargo/env
-source ~/.profile
+print_result(){
+    if [ $2 -eq $1 ]; then
+        print_done
+    else
+        print_failed
+    fi
+}
 
-### go
-apt -y install golang
 
-### perl
-apt -y install perl perl-debug
+apt_install() {
+    echo "------------------ apt_install $1" >> "$LOG_FILE"
+    printf "[  ....  ] Installing: %s\r" "$1"
+    sudo apt-get install "$1" -y >> $LOG_FILE
+    r=$?
+    printf "[  ....  ] Installing: %s" "$1"
+    print_result 0 $r
+}
 
-### ruby rubyrails
-apt -y install ruby-full ruby-rails
 
-### lisp
-apt -y install sbcl
+apt_add_repo(){
+    echo "------------------ apt_add_repo $1" >> $LOG_FILE
+    printf "[  ....  ] Adding apt repo: %s\r" "$1"
+    sudo add-apt-repository "$1" -yn >> $LOG_FILE
+    r=$?
+    printf "[  ....  ] Adding apt repo: %s" "$1"
+    print_result 0 $r
+}
 
-### assemblers
-apt -y install binutils # gnu assembler
-apt -y install nasm
 
-#################
-#     tools     #
-#################
+curl_download(){
+    echo "------------------ curl_download $1" >> $LOG_FILE
+    printf "[  ....  ] Downloading %s\r" "%1"
+    curl -LsSf $1 -o $2
+    r=$?
+    printf "[  ....  ] Downloading %s" "$1"
+    print_result 0 $r
+}
 
-### cmake
-apt -y install cmake
 
-### wine
-dpkg --add-architecture i386 
-wget -nc https://dl.winehq.org/wine-builds/winehq.key
-apt-key add winehq.key
-aptitude -y install --install-recommends winehq-stable
+git_clone(){
+    echo "------------------ git_clone $1" >> $LOG_FILE
+    printf "[  ....  ] Cloning %s\r" "$1"
+    git clone --recursive --depth 1 $1
+    r=$?
+    printf "[  ....  ] Cloning %s" "$1"
+    print_result 0 $r
+}
 
-### gzip tar
-apt -y install gzip tar
 
-### latex
-list=$(apt-cache --names-only search ^texlive-* | \
-awk '{ print $1 }' | grep -v texlive-lang* | \
-awk '{ print $1 }' | grep -v texlive-full)
-apt -y install $list
 
-### office
-apt -y install libreoffice
+#
+#~~~~~~   Installations  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
 
-### vscode
-apt -y install code
-code --install-extension 13xforever.language-x86-64-assembly
-code --install-extension esbenp.prettier-vscode
-code --install-extension formulahendry.auto-rename-tag
-code --install-extension Gimly81.matlab
-code --install-extension Ikuyadeu.r
-code --install-extension James-Yu.latex-workshop
-code --install-extension mohsen1.prettify-json
-code --install-extension ms-dotnettools.csharp
-code --install-extension ms-python.python
-code --install-extension ms-vscode-remote.remote-wsl
-code --install-extension ms-vscode.cmake-tools
-code --install-extension ms-vscode.cpptools
-code --install-extension ms-vscode.powershell
-code --install-extension nobuhito.printcode
-code --install-extension PKief.material-icon-theme
-code --install-extension platformio.platformio-ide
-code --install-extension pranaygp.vscode-css-peek
-code --install-extension redhat.java
-code --install-extension ritwickdey.LiveServer
-code --install-extension slevesque.vscode-hexdump
-code --install-extension TabNine.tabnine-vscode
-code --install-extension tomoki1207.pdf
-code --install-extension twxs.cmake
-code --install-extension VisualStudioExptTeam.vscodeintellicode
-code --install-extension vsciot-vscode.vscode-arduino
-code --install-extension vscjava.vscode-java-debug
-code --install-extension vscjava.vscode-java-dependency
-code --install-extension vscjava.vscode-java-pack
-code --install-extension vscjava.vscode-java-test
-code --install-extension vscjava.vscode-maven
-code --install-extension vscode-icons-team.vscode-icons
-code --install-extension vscodevim.vim
-code --install-extension yzhang.markdown-all-in-one
-code --install-extension Zignd.html-css-class-completion
 
-### gvim
-apt -y install vim-gui-common
+printf "\n\n---------------------------------------------------\n" >> $LOG_FILE
+echo -n $(date) >> $LOG_FILE
+printf "\n---------------------------------------------------\n\n" >> $LOG_FILE
 
-### audacity
-apt -y install audacity
 
-### vlc and codecs
-apt -y install vlc*
-apt -y install libdvdcss2 libdvdnav4 libdvdread4
+#############################################
+#   Repos
+#############################################
 
-### ffmpeg
-apt -y install ffmpeg
+if [ $repos -eq 1 ]; then
+    # printf "\n --- Add Repos --- \n"
 
-### filezilla
-apt -y install filezilla
+    # apt_add_repo ppa:jonathonf/vim
+    # apt_add_repo ppa:deadsnakes/ppa
+    # apt_add_repo ppa:ubuntuhandbook1/audacity
+    true
+fi
 
-### firefox
-apt -y install firefox
+if [ $update_apt -eq 1 ]; then
+    printf "[  ....  ] apt update running...\r"
+    sudo apt-get update >> $LOG_FILE
+    printf "[  ....  ] apt update running..."
+    print_result 0 $?
+fi
 
-### chrome
-wget -O chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-apt -y install ./chrome.deb
-rm ./chrome.deb
 
-#################
-#     others    #
-#################
+#############################################
+#   General Tools
+#############################################
 
-### slack
-wget -O slack.deb https://downloads.slack-edge.com/linux_releases/slack-desktop-4.4.0-amd64.deb
-apt -y install ./slack.deb
-rm ./slack.deb
+if [ $gen_tools -eq 1 ]; then
+    printf "\n --- General Tools --- \n"
 
-### discord
-wget -O discord.deb https://dl.discordapp.net/apps/linux/0.0.10/discord-0.0.10.deb
-apt -y install ./discord.deb
-rm ./discord.deb
+    apt_install gzip
+    apt_install unzip
+    apt_install zip
+    apt_install tar
+    apt_install curl
+    apt_install git
+    apt_install tree
+    apt_install vim
 
-### telegram
-apt -y install telegram-desktop
+    apt_install ffmpeg
+    apt_install suckless-tools
+    apt_install pandoc
+    apt_install poppler-utils
+    apt_install ranger
+    apt_install screenfetch
+fi
 
-### steam
-apt -y install steam
 
-### minecraft
-apt -y install minecraft-launcher
+#############################################
+#   Development
+#############################################
 
-#################
-#  engineering  #
-#################
+if [ $dev_tools -eq 1 ]; then
+    printf "\n --- Development --- \n"
 
-### kicad eagle
+    apt_install python3.12-full
+    apt_install python3.12-dev
+    # apt_install python3.12-doc
+    apt_install python3.12-dbg
+    apt_install python-is-python3
 
-### ansys
+    apt_install build-essential
+    apt_install manpages-dev
+    apt_install glibc-tools
+    apt_install binutils-dev
+    apt_install clang
+    apt_install clangd
+    apt_install nasm
+     
+    apt_install libboost-all-dev
+    apt_install freeglut3-dev
+    apt_install libglfw3-dev
+    apt_install libsfml-dev
+    apt_install libsdl2-dev
+    apt_install libgl1-mesa-dev
 
-### autocad fusion360 freecad
+    apt_install default-jre
+    apt_install default-jdk
+    apt_install default-jdk-doc
 
-#################
-#     config    #
-#################
+    apt_install openjdk-21-jre
+    apt_install openjdk-21-jdk
+    apt_install openjdk-21-dbg
+    apt_install openjdk-21-doc
+    apt_install openjdk-21-source
 
-apt -y fzf suckless-tools fff
+    apt_install octave
+    apt_install sbcl
 
-### my dotfiles
+    apt_install cmake
+    apt_install make
 
-### themes and looks
+    apt_install bison
+    apt_install flex
+
+    # RUST 
+        curl_download https://sh.rustup.rs /tmp/rust.sh
+        printf "[  ....  ] Installing rust\r"
+        bash /tmp/rust.sh -y >> $LOG_FILE 2>&1
+        printf "[  ....  ] Installing rust"
+        print_result 0 $?
+
+    # NODE
+        printf "$COLOR_RED IMPORTANT: $COLOR_DEFAULT Install nvm and nodejs manually!\n"
+fi
+
+
+#############################################
+#   Installs Folder
+#############################################
+
+if [ $installs_folder -eq 1 ]; then
+    printf "\n --- Installs Folder --- \n"
+    mkdir -vp ~/Installs
+
+
+    cd ~/Installs
+    git_clone https://github.com/dylanaraps/fff
+    cd fff
+    make install
+
+
+    cd ~/Installs
+    git_clone https://github.com/junegunn/fzf
+    cd fzf
+    ./install --all
+
+
+    cd ~/Installs
+    git_clone https://github.com/lincheney/fzf-tab-completion
+fi
+
+
+#############################################
+#   Desktop Apps
+#############################################
+
+if [ $desktop -eq 1 ]; then
+    printf "\n --- Desktop Apps --- \n"
+
+    curl_download "https://discord.com/api/download?platform=linux&format=deb" /tmp/discord.deb
+    apt_install /tmp/discord.deb
+
+    apt_install libreoffice
+    apt_install vim-gui-common
+
+    apt_install vlc*
+    apt_install audacity
+fi
+
+
+
+cd $START_DIR
