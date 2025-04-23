@@ -244,7 +244,7 @@ if [ $installs_folder -eq 1 ]; then
     cd ~/Installs
     git_clone https://github.com/dylanaraps/fff
     cd fff
-    make install
+    sudo make install
 
 
     cd ~/Installs
