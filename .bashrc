@@ -60,7 +60,7 @@ fi
 
 ## PROMPT STUFF ################################
 
-parse_git_branch() {
+git_branch() {
     branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
 
     if [[ -n $branch ]]; then
@@ -99,7 +99,7 @@ PS_USER="\033[0;38;$PS_COL2;07m \u@\h \033[0;38;$PS_COL2;48;$PS_COL3;01m$PS_SEPF
 PS_DIR="\033[0;38;$PS_COL3;07m \w \033[0;38;$PS_COL3;01m$PS_SEPFR"
 
 
-PS1="$PS_FIRSTLINE$PS_TIME$PS_USER$PS_DIR\$(parse_git_branch)$PS_SECONDLINE"
+PS1="$PS_FIRSTLINE$PS_TIME$PS_USER$PS_DIR\$(git_branch)$PS_SECONDLINE"
 
 
 if [ "$color_prompt" != yes ]; then
