@@ -81,8 +81,7 @@ git_branch() {
 }
 
 PS_SEPFR=$(echo $'\ue0b0')
-# PS_SEPBK=$(echo $'\ue0be')
-PS_SEPBK=" "
+PS_SEPBK=$(echo $'\ue0b2')
 PS_COL1="5;69;01"
 PS_COL3="5;255;01"
 if [[ ${EUID} == 0 ]]; then
