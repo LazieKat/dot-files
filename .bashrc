@@ -1,8 +1,11 @@
+###### Default Stuff ######
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
+
 
 HISTCONTROL=ignoreboth      # don't put duplicate lines or lines starting with space in the history.
 HISTSIZE=10000
@@ -26,7 +29,7 @@ case "$TERM" in
     linux                  ) color_prompt=yes; export TERM=xterm-color;;
     screen                 ) color_prompt=yes; export TERM=xterm-color;;
 esac
-
+# 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
         color_prompt=yes
@@ -35,24 +38,6 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
-# Alias definitions.
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -68,14 +53,78 @@ if ! shopt -oq posix; then
   fi
 fi
 
+
+
 ###################################################################################################################
+
+
+## PROMPT STUFF ################################
+
+parse_git_branch() {
+    branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+
+    if [[ -n $branch ]]; then
+        branch=" ( $branch"
+
+        dirty=$(git status --porcelain 2>/dev/null)
+
+        if [[ -n $dirty ]];then
+            branch="$branch*)"
+        else
+            branch="$branch)"
+        fi
+    else
+        branch=""
+    fi
+
+    echo "$branch"
+}
+
+PS_SEPFR=$(echo $'\ue0b0')
+# PS_SEPBK=$(echo $'\ue0be')
+PS_SEPBK=" "
+PS_COL1="5;69;01"
+PS_COL3="5;255;01"
+if [[ ${EUID} == 0 ]]; then
+    PS_COL2="5;124;01"
+else
+    PS_COL2="5;106;01"
+fi
+
+
+PS_FIRSTLINE="$(echo $'\u256D\u2500')\033[0;38;$PS_COL1;01m$PS_SEPBK"
+PS_SECONDLINE="\n\033[00m$(echo $'\u2570\u2500') \\$ "
+PS_TIME="\033[0;38;$PS_COL1;07m \@ \033[0;38;$PS_COL1;48;$PS_COL2;01m$PS_SEPFR"
+PS_USER="\033[0;38;$PS_COL2;07m \u@\h \033[0;38;$PS_COL2;48;$PS_COL3;01m$PS_SEPFR"
+PS_DIR="\033[0;38;$PS_COL3;07m \w \033[0;38;$PS_COL3;01m$PS_SEPFR"
+
+
+PS1="$PS_FIRSTLINE$PS_TIME$PS_USER$PS_DIR\$(parse_git_branch)$PS_SECONDLINE"
+
+
+if [ "$color_prompt" != yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+## PATH STUFF ##################################
 
 export PATH=$HOME/.local/bin:/usr/games/bin/:$HOME/Installs/BambuStudio/install_dir/bin:/home/linuxbrew/.linuxbrew/bin:$PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 export BAT_PAGER=""
 
-
 ## MAN STUFF ###################################
+
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
 export LESS_TERMCAP_me=$'\e[0m'
@@ -83,7 +132,6 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
-
 
 ## ROS STUFF ###################################
 
@@ -113,6 +161,6 @@ f() {
 
 source ~/Installs/fzf-tab-completion/bash/fzf-bash-completion.sh
 bind -x '"\t": fzf_bash_completion'
-FZF_TAB_COMPLETION_PROMPT='> '
-FZF_COMPLETION_AUTO_COMMON_PREFIX=true
-FZF_DEFAULT_OPTS="--style full --height 40%"
+export FZF_TAB_COMPLETION_PROMPT='> '
+export FZF_COMPLETION_AUTO_COMMON_PREFIX=true
+export FZF_DEFAULT_OPTS="--style full --height 40%"
