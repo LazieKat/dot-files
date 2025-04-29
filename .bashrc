@@ -64,7 +64,7 @@ git_branch() {
     branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
 
     if [[ -n $branch ]]; then
-        branch=" ( $branch"
+        branch="( $branch"
 
         dirty=$(git status --porcelain 2>/dev/null)
 
@@ -80,26 +80,27 @@ git_branch() {
     echo "$branch"
 }
 
-PS_SEPFR=$(echo $'\ue0b0')
-PS_SEPBK=$(echo $'\ue0b2')
-PS_COL1="5;69;01"
-PS_COL3="5;255;01"
+
+PS_MC1="\033[0;38;5;69m"
+PS_MC2="\033[0;38;5;106m"
+PS_MC3="\033[0;38;5;214m"
+PS_MCD="\033[0m"
+
+
 if [[ ${EUID} == 0 ]]; then
-    PS_COL2="5;124;01"
+    PS_MC2="\033[0;38;5;124m"
 else
-    PS_COL2="5;106;01"
+    PS_MC2="\033[0;38;5;106m"
 fi
 
 
-PS_FIRSTLINE="$(echo $'\u256D\u2500')\033[0;38;$PS_COL1;01m$PS_SEPBK"
-PS_SECONDLINE="\n\033[00m$(echo $'\u2570\u2500') \\$ "
-PS_TIME="\033[0;38;$PS_COL1;07m \@ \033[0;38;$PS_COL1;48;$PS_COL2;01m$PS_SEPFR"
-PS_USER="\033[0;38;$PS_COL2;07m \u@\h \033[0;38;$PS_COL2;48;$PS_COL3;01m$PS_SEPFR"
-PS_DIR="\033[0;38;$PS_COL3;07m \w \033[0;38;$PS_COL3;01m$PS_SEPFR"
-
+PS_FIRSTLINE="╭─ "
+PS_SECONDLINE="$PS_MCD\n╰─ \\$ "
+PS_TIME="$PS_MC3\@ ❯ "
+PS_USER="$PS_MC2\u@\h ❯ "
+PS_DIR="$PS_MC1\w "
 
 PS1="$PS_FIRSTLINE$PS_TIME$PS_USER$PS_DIR\$(git_branch)$PS_SECONDLINE"
-
 
 if [ "$color_prompt" != yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
