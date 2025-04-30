@@ -23,7 +23,7 @@ alias clc='clear'
 alias push-dot='~/Installs/dot-files/udf.sh'
 alias pull-dot='~/Installs/dot-files/pdf.sh'
 
-
+alias sf='screenfetch'
 
 alias cdd='cd ~/Desktop'
 alias cdr='cd ~/ros2_ws'
