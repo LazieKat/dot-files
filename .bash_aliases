@@ -41,3 +41,20 @@ alias slr='source ./install/local_setup.bash'
 alias sai='sudo apt install'
 
 alias qgc='nohup ~/Installs/QGC/QGroundControl.AppImage > /dev/null 2>&1 &'
+
+
+cdl() {
+    if [ "$#" -eq 0 ]; then
+        set ~ 
+    fi
+
+    cd "$1" || return
+
+    clear
+
+    printf "\n cd -> "
+    pwd
+    printf "\n"
+
+    ll
+}

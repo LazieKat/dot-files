@@ -123,6 +123,7 @@ function CocSyncSetup()
     call CocInstallExtensions([ 
         \ "coc-marketplace",
         \ "coc-clangd",
+        \ "coc-ccls",
         \ "coc-vimlsp",
         \ "coc-pyright",
         \ "coc-sh"
