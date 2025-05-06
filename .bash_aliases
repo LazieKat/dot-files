@@ -42,6 +42,11 @@ alias sai='sudo apt install'
 
 alias qgc='nohup ~/Installs/QGC/QGroundControl.AppImage > /dev/null 2>&1 &'
 
+alias gc='git commit -a'
+alias gp='git push'
+alias gu='git pull'
+alias gs='git status'
+
 
 cdl() {
     if [ "$#" -eq 0 ]; then
