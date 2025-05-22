@@ -20,6 +20,7 @@ alias ta='tree -aF'
 
 alias   c='clear'
 alias clc='clear'
+alias cls='clear'
 alias  :q='exit'
 
 alias push-dot='~/Installs/dot-files/udf.sh'
