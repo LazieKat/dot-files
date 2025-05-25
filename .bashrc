@@ -162,3 +162,5 @@ bind -x '"\t": fzf_bash_completion'
 export FZF_TAB_COMPLETION_PROMPT='> '
 export FZF_COMPLETION_AUTO_COMMON_PREFIX=true
 export FZF_DEFAULT_OPTS="--style full --height 40%"
+
+bind 'set completion-ignore-case on'
