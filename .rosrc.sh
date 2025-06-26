@@ -1,5 +1,5 @@
 #export ROS_LOCALHOST_ONLY=1
-export ROS_DOMAIN_ID=30
+export ROS_DOMAIN_ID=0
 source /opt/ros/humble/setup.bash
 source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash 
 source /usr/share/colcon_cd/function/colcon_cd.sh

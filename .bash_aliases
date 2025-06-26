@@ -41,6 +41,8 @@ alias  sr='source /opt/ros/humble/setup.bash'
 alias slr='source ./install/local_setup.bash'
 
 alias sai='sudo apt install'
+alias sau='sudo apt update'
+alias sag='sudo apt upgrade'
 
 alias qgc='nohup ~/Installs/QGC/QGroundControl.AppImage > /dev/null 2>&1 &'
 
