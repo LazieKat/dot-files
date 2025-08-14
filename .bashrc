@@ -117,7 +117,7 @@ esac
 
 ## PATH STUFF ##################################
 
-export PATH=$HOME/.local/bin:/usr/games/bin/:$HOME/Installs/BambuStudio/install_dir/bin:/home/linuxbrew/.linuxbrew/bin:$HOME/Installs/android-sdk-linux/tools:$PATH
+export PATH=$HOME/.local/bin:/usr/games/bin/:$HOME/Installs/BambuStudio/install_dir/bin:/home/linuxbrew/.linuxbrew/bin:$HOME/Installs/android-sdk-linux/tools:$HOME/Installs/android-sdk-linux/platform-tools:$HOME/Installs/android-sdk-linux/build-tools:$PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/                                                                  O
 export BAT_PAGER=""                                                                                                      O
                                                                                                                          O
