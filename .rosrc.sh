@@ -5,6 +5,7 @@ source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
 source /usr/share/colcon_cd/function/colcon_cd.sh
 export _colcon_cd_root=/opt/ros/humble/
 
+source ~/Installs/px4_msgs_ws/install/setup.sh
 
 export MY_ROBOT_IP=192.168.0.90
 export ROS_MASTER_URI=http://$MY_ROBOT_IP:11311
