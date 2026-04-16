@@ -135,6 +135,14 @@ endfunction
 command CocSyncSetup call CocSyncSetup()
 
 
+function Transp()
+    IndentLinesDisable
+    colo default
+    hi CursorLine term=bold cterm=bold guibg=Grey40
+endfunction
+
+command Transp call Transp()
+
 """""""""""""""""""""""""""""""""""""
 "    Plugins Config
 """""""""""""""""""""""""""""""""""""

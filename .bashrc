@@ -164,3 +164,4 @@ export FZF_COMPLETION_AUTO_COMMON_PREFIX=true
 export FZF_DEFAULT_OPTS="--style full --height 40%"
 
 bind 'set completion-ignore-case on'
+export PATH=$PATH:/opt/xtensa-esp-elf/bin/
