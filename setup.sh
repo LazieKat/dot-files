@@ -175,6 +175,7 @@ if [ $gen_tools -eq 1 ]; then
         vim
         bat
         diff-so-fancy
+        tmux
 
         ffmpeg
         suckless-tools
