@@ -2,6 +2,7 @@ cp ~/.vimrc  ~/Installs/dot-files -v
 cp ~/.bashrc ~/Installs/dot-files -v
 cp ~/.bash_aliases ~/Installs/dot-files -v
 cp ~/.rosrc.sh ~/Installs/dot-files -v
+cp ~/.config/git/* ~/Installs/.config/git -v
 
 OLD_PWD=$PWD
 

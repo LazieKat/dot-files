@@ -51,9 +51,10 @@ alias  gc='git commit -a'
 alias  gp='git push'
 alias  gu='git pull'
 alias  gs='git status'
-alias  gl='git log'
 alias  gb='git branch'
 alias gcl='git clone'
+alias  gl="git log --all --graph --pretty=\
+format:'%C(magenta)%h %C(white) %an %ar%C(auto) %D%n%s%n'"
 
 
 cdl() {
