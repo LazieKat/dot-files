@@ -145,6 +145,7 @@ if [ $repos -eq 1 ]; then
     apt_add_repo ppa:jonathonf/vim
     apt_add_repo ppa:deadsnakes/ppa
     apt_add_repo ppa:ubuntuhandbook1/audacity
+    apt_add_repo ppa:aos1/diff-so-fancy
     true
 fi
 
@@ -173,6 +174,7 @@ if [ $gen_tools -eq 1 ]; then
         tree
         vim
         bat
+        diff-so-fancy
 
         ffmpeg
         suckless-tools
