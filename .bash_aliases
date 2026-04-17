@@ -46,10 +46,14 @@ alias sag='sudo apt upgrade'
 
 alias qgc='nohup ~/Installs/QGC/QGroundControl.AppImage > /dev/null 2>&1 &'
 
-alias gc='git commit -a'
-alias gp='git push'
-alias gu='git pull'
-alias gs='git status'
+alias  ga='git add'
+alias  gc='git commit -a'
+alias  gp='git push'
+alias  gu='git pull'
+alias  gs='git status'
+alias  gl='git log'
+alias  gb='git branch'
+alias gcl='git clone'
 
 
 cdl() {
