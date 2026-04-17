@@ -7,6 +7,6 @@ cp ./.vimrc  ~ -v
 cp ./.bashrc ~ -v
 cp ./.bash_aliases ~ -v
 cp ./.rosrc.sh ~ -v
-cp ./.config ~ -v
+cp ./.config ~ -rv
 
 cd $OLD_PWD
