@@ -3,6 +3,7 @@ cp ~/.bashrc ~/Installs/dot-files -v
 cp ~/.bash_aliases ~/Installs/dot-files -v
 cp ~/.rosrc.sh ~/Installs/dot-files -v
 cp ~/.config/git ~/Installs/dot-files/.config -rv
+cp ~/.config/tmux ~/Installs/dot-files/.config -rv
 
 OLD_PWD=$PWD
 

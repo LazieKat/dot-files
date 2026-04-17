@@ -31,7 +31,6 @@ alias sf='screenfetch'
 alias cdd='cd ~/Desktop'
 alias cdi='cd ~/Installs'
 alias cdy='cd ~/Installs/YAPR'
-alias cdm='cd ~/Installs/myos'
 
 alias tup='top -u $USER'
 
@@ -56,6 +55,10 @@ alias gcl='git clone'
 alias  gl="git log --all --graph --pretty=\
 format:'%C(magenta)%h %C(white) %an %ar%C(auto) %D%n%s%n'"
 
+alias tm='tmux'
+alias ta='tmux attach -t'
+alias tl='tmux list-sessions'
+alias tn='tmux new-session -s'
 
 cdl() {
     if [ "$#" -eq 0 ]; then
